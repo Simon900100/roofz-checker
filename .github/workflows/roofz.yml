@@ -2,11 +2,15 @@ name: Roofz checker
 
 on:
   schedule:
-    - cron: "*/10 * * * *"   # iedere 10 minuten (repo moet public zijn, anders zijn de gratis minuten op)
+    - cron: "*/10 * * * *"   # iedere 10 minuten
   workflow_dispatch:        # handmatig starten via de Actions-tab
 
 permissions:
   contents: write
+
+concurrency:
+  group: roofz
+  cancel-in-progress: false
 
 jobs:
   check:
@@ -34,4 +38,5 @@ jobs:
           git config user.email "roofz-bot@users.noreply.github.com"
           git add seen.json
           git diff --staged --quiet || git commit -m "Update gezien-lijst"
+          git pull --rebase -X theirs
           git push

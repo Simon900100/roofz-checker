@@ -2,7 +2,7 @@ name: Roofz checker
 
 on:
   schedule:
-    - cron: "7 * * * *"   # ieder uur, 7 minuten over
+    - cron: "*/10 * * * *"   # iedere 10 minuten (repo moet public zijn, anders zijn de gratis minuten op)
   workflow_dispatch:        # handmatig starten via de Actions-tab
 
 permissions:
